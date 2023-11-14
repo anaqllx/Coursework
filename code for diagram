@@ -1,0 +1,54 @@
+Table Disciplines {
+    discipline_id integer
+    discipline_name varchar
+    description varchar
+    hours timestamp
+    department_id integer
+    instructor_id integer
+    semester integer
+    obligation boolean
+    specialty_id integer
+    program_id integer
+} 
+
+Table Faculties {
+    faculty_id integer
+    faculty_name varchar
+}
+
+Table Departments {
+    department_id integer
+    department_name varchar
+    faculty_id integer
+}
+
+Table Instructors {
+    instructor_id integer
+    instructor_name varchar
+    phone_number integer
+    email varchar
+    department_id integer
+}
+
+Table Specialties {
+    specialty_id integer
+    specialty_name varchar
+    faculty_id integer
+}
+
+Table Programs {
+    program_id integer 
+    program_name varchar
+    specialty_id integer 
+    discipline_id integer
+}
+
+Ref: Programs.program_id - Disciplines.program_id
+Ref: Specialties.specialty_id > Programs.specialty_id
+Ref: Disciplines.discipline_id - Programs.discipline_id
+Ref: Specialties.specialty_id > Disciplines.specialty_id
+Ref: Faculties.faculty_id > Specialties.faculty_id
+Ref: Departments.department_id > Instructors.department_id
+Ref: Instructors.instructor_id - Disciplines.instructor_id
+Ref: Faculties.faculty_id > Departments.faculty_id
+Ref: Departments.department_id > Disciplines.department_id
